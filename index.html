@@ -15,11 +15,12 @@
 <!-- write your code here -->
 <style>
   #animation_container {
-	position:absolute;
-	margin:auto;
-	left:0;right:0;
-	top:0;bottom:0;
-  }
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+	overflow: hidden;
+}
 </style>
 <script src="libs/1.0.0/createjs.min.js"></script>
 <script src="script.js"></script>
@@ -57,11 +58,11 @@ function handleComplete(evt,comp) {
 	//Registers the "tick" event listener.
 	fnStartAnimation = function() {
 		stage.addChild(exportRoot);
-		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.framerate = Math.min(30, lib.properties.fps);
 		createjs.Ticker.addEventListener("tick", stage);
 	}	    
 	//Code to support hidpi screens and responsive scaling.
-	AdobeAn.makeResponsive(true,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.makeResponsive(true, 'both', false, 0.8, [canvas, anim_container, dom_overlay_container]);	
 	AdobeAn.compositionLoaded(lib.properties.id);
 	fnStartAnimation();
 }
